@@ -31,16 +31,6 @@
             
             var get_raw_html = new XMLHttpRequest();
             get_raw_html.open("GET", "raw.html", true);
-            get_raw_html.onreadystatechange = function() {
-                if (this.readyState !== 4) {
-                    return
-                };
-                if (this.status !== 200) {
-                    return
-                }
-
-                document.getElementById("y").innerHTML= this.responseText;
-            };
             get_raw_html.send();
 
             var raw_page = get_raw_html.responseText;
