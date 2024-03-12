@@ -26,11 +26,7 @@
                 return null;
             }
 
-            async function get_xhr(path) {
-                return await get_xhr_promise(path)
-            }
-
-            function get_xhr_promise(path) {
+            function get_xhr(path) {
                 return new Promise(function(response) {
                     var xhr_request = new XMLHttpRequest();
                     xhr_request.open("GET", path, true);
@@ -50,7 +46,7 @@
             
             var raw_page
             const raw_page_promise = get_xhr("raw.html")
-                .then(response => {
+                .then(function(response) {
                     console.log(response);
                     raw_page = response;
             });
