@@ -309,6 +309,34 @@
 		</script>
 	</head>
 	<body>
+		<script>
+			function get_cookie(name) {
+                var true_name = name + "=";
+                var split_cookie = document.cookie.split(';');
+                for(var i = 0; i < split_cookie.length; i++) {
+                    var split = split_cookie[i];
+                    while (split.charAt(0) == ' ') {
+                        split = split.substring(1, split.length);
+                    }
+                    if (split.indexOf(true_name) == 0) {
+                        return split.substring(true_name.length, split.length)
+                    }
+                }
+                return null;
+            }
+
+			const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
+                .then(FingerprintJS => FingerprintJS.load());
+
+			fingerprint_js_promise
+                .then(fingerprint => fingerprint.get())
+                .then(result => {
+                    const visitor_id = result.visitorId;
+                    if (password != get_cookie("attempt_password")) {
+                        window.location.href = "https://xpath1.github.io/super/";
+                    }
+            });
+		</script>
 		<canvas id="screen" width="480" height="320"></canvas>
 		<section id="gameinfo">
 			<p>Mappings:</p>
