@@ -27,7 +27,7 @@
             }
 
             function get_xhr(path) {
-                return new Promise(function(response) {
+                return new Promise(function(resolve) {
                     var xhr_request = new XMLHttpRequest();
                     xhr_request.open("GET", path, true);
                     xhr_request.onreadystatechange = function() {
@@ -45,7 +45,7 @@
                 .then(FingerprintJS => FingerprintJS.load());
             
             var raw_page
-            const raw_page_promise = await get_xhr("raw.html")
+            const raw_page_promise = get_xhr("raw.html")
                 .then(function(response) {
                     console.log(response);
                     raw_page = response;
