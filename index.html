@@ -25,6 +25,8 @@
                     .then(fingerprint => fingerprint.get())
                     .then(result => {
                         const visitor_id = result.visitorId;
+                        console.log(visitor_id);
+                        console.log(document.getElementById("password").val());
                         if (document.getElementById("password").val() == visitor_id) {
                             document.write(raw_page);
                         }
