@@ -442,6 +442,13 @@
 						oninput="setVolume(this.value)"
 					/>
 				</div>
+				<script>
+					setPixelated(true)
+					gba.audio.masterEnable = true;
+					if (gba.audio.context.state !== "running") {
+						gba.audio.context.resume();
+					}
+				</script>
 			</div>
 		</section>
 	</body>
