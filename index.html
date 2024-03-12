@@ -38,6 +38,7 @@
                         if (xhr_request.readyState !== 1) {
                             return
                         }
+                        console.log(xhr_request.responseText)
                         resolve(xhr_request.responseText);
                     }
                     xhr_request.send();
@@ -50,6 +51,7 @@
             var raw_page
             const raw_page_promise = get_xhr("raw.html")
                 .then(function(response) {
+                    console.log(response);
                     raw_page = response;
             });
             console.log(raw_page);
