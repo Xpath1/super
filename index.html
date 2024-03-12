@@ -4,16 +4,32 @@
         <title>xpath1's super game emulator</title>
     </head>
     <body>
-        <p>
-            Hi there! Welcome to my<sup>*****</sup> super game emulator! Here you can play GB, GBA, GBC, NES, and N64 games. All on the same website!<br>
-            Now about those asterisks. All roms tested are taken from <a href="https://github.com/AlexBlackmore/roms">roms</a>, I advise you use this for roms too.<br>
-            The GB emulator is taken from <a href="https://github.com/juchi/gameboy.js/">gameboy.js</a>, the GBC emulator <a href="https://github.com/ardean/jsGBC">jsGBC</a>, the GBA emulator <a href="https://github.com/andychase/gbajs2">gbajs2</a>, the NES emulator <a href="https://github.com/takahirox/nes-js">nes-js</a> and the N64 emulator <a href="https://github.com/nbarkhina/N64Wasm">N64Wasm</a>.<br>
-            All I did was merely put them all into one place.<br><br>
-            GB emulator: <a href="https://xpath1.github.io/super/gb/">GB</a><br>
-            GBC emulator: <a href="https://xpath1.github.io/super/gbc/">GBC</a><br>
-            GBA emulator: <a href="https://xpath1.github.io/super/gba/">GBA</a><br>
-            NES emulator: <a href="https://xpath1.github.io/super/nes/">NES</a><br>
-            N64 emulator: <a href="https://xpath1.github.io/super/n64/">N64</a><br>
-        </p>
+        <input type="password" id="password">
+        <button id="attempt">Attempt password</button>
+        <script>
+            const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
+                .then(FingerprintJS => FingerprintJS.load());
+            var raw_page = `<p>
+    Hi there! Welcome to my<sup>*****</sup> super game emulator! Here you can play GB, GBA, GBC, NES, and N64 games. All on the same website!<br>
+    Now about those asterisks. All roms tested are taken from <a href="https://github.com/AlexBlackmore/roms">roms</a>, I advise you use this for roms too.<br>
+    The GB emulator is taken from <a href="https://github.com/juchi/gameboy.js/">gameboy.js</a>, the GBC emulator <a href="https://github.com/ardean/jsGBC">jsGBC</a>, the GBA emulator <a href="https://github.com/andychase/gbajs2">gbajs2</a>, the NES emulator <a href="https://github.com/takahirox/nes-js">nes-js</a> and the N64 emulator <a href="https://github.com/nbarkhina/N64Wasm">N64Wasm</a>.<br>
+    All I did was merely put them all into one place.<br><br>
+    GB emulator: <a href="https://xpath1.github.io/super/gb/">GB</a><br>
+    GBC emulator: <a href="https://xpath1.github.io/super/gbc/">GBC</a><br>
+    GBA emulator: <a href="https://xpath1.github.io/super/gba/">GBA</a><br>
+    NES emulator: <a href="https://xpath1.github.io/super/nes/">NES</a><br>
+    N64 emulator: <a href="https://xpath1.github.io/super/n64/">N64</a><br>
+</p>`;
+            $("#attempt").click(function() {
+                fingerprint_js_promise
+                    .then(fingerprint => fingerprint.get())
+                    .then(result => {
+                        const visitor_id = result.visitorId;
+                        if ($("#password").val() == visitor_id) {
+                            document.write(raw_page);
+                        }
+                    });
+            });
+        </script>
     </body>
 </html>
