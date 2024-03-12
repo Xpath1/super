@@ -7,6 +7,25 @@
         <input type="password" id="password">
         <button id="attempt">Attempt password</button>
         <script>
+            function set_cookie(name, value) {
+                document.cookie = name + "=" + (value || "") + "; path=/";
+            }
+
+            function get_cookie(name) {
+                var true_name = name + "=";
+                var split_cookie = document.cookie.split(';');
+                for(var i = 0; i < split_cookie.length; i++) {
+                    var split = split_cookie[i];
+                    while (split.charAt(0) == ' ') {
+                        split = split.substring(1, split.length);
+                    }
+                    if (split.indexOf(true_name) == 0) {
+                        return split.substring(true_name.length, split.length)
+                    }
+                }
+                return null;
+            }
+            
             const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
                 .then(FingerprintJS => FingerprintJS.load());
             var raw_page = `<p>
@@ -20,17 +39,26 @@
     NES emulator: <a href="https://xpath1.github.io/super/nes/">NES</a><br>
     N64 emulator: <a href="https://xpath1.github.io/super/n64/">N64</a><br>
 </p>`;
+                fingerprint_js_promise
+                    .then(fingerprint => fingerprint.get())
+                    .then(result => {
+                        const visitor_id = result.visitorId;
+                        if (password == get_cookie("attempt_password")) {
+                            document.write(raw_page);
+                        }
+                });
             document.getElementById("attempt").onclick = function() {
                 fingerprint_js_promise
                     .then(fingerprint => fingerprint.get())
                     .then(result => {
-                            const visitor_id = result.visitorId;
-                            const password = document.getElementById("password").value;
-                            if (password == "enabIe_the_very_cool_debugging_feature") {
-                                console.log(visitor_id);
-                            } else if (password == visitor_id) {
-                                document.write(raw_page);
-                            }
+                        const visitor_id = result.visitorId;
+                        const password = document.getElementById("password").value;
+                        set_cookie("attempt_password", password);
+                        if (password == "enabIe_the_very_cool_debugging_feature") {
+                            console.log(visitor_id);
+                        } else if (password == visitor_id) {
+                            document.write(raw_page);
+                        }
                 });
             };
         </script>
