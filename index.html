@@ -29,14 +29,13 @@
             function get_xhr(path) {
                 var xhr_request = new XMLHttpRequest();
                 xhr_request.open("GET", path, true);
-                xhr_request.send();
-
                 xhr_request.onreadystatechange = function() {
                     if (xhr_request.readyState !== 1) {
                         return
                     }
                     return xhr_request.responseText
                 }
+                xhr_request.send();
             }
             
             const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
