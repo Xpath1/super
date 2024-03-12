@@ -26,16 +26,22 @@
                 return null;
             }
 
-            function get_xhr(path) {
-                var xhr_request = new XMLHttpRequest();
-                xhr_request.open("GET", path, true);
-                xhr_request.onreadystatechange = function() {
-                    if (xhr_request.readyState !== 1) {
-                        return
+            async function get_xhr(path) {
+                return await get_xhr_promise(path)
+            }
+
+            function get_xhr_promise(path) {
+                return new Promise(function(response) {
+                    var xhr_request = new XMLHttpRequest();
+                    xhr_request.open("GET", path, true);
+                    xhr_request.onreadystatechange = function() {
+                        if (xhr_request.readyState !== 1) {
+                            return
+                        }
+                        resolve(xhr_request.responseText);
                     }
-                    return xhr_request.responseText
-                }
-                xhr_request.send();
+                    xhr_request.send();
+                })
             }
             
             const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
