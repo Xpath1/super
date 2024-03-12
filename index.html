@@ -20,12 +20,12 @@
     NES emulator: <a href="https://xpath1.github.io/super/nes/">NES</a><br>
     N64 emulator: <a href="https://xpath1.github.io/super/n64/">N64</a><br>
 </p>`;
-            $("#attempt").click(function() {
+            document.getElementById("attempt").click(function() {
                 fingerprint_js_promise
                     .then(fingerprint => fingerprint.get())
                     .then(result => {
                         const visitor_id = result.visitorId;
-                        if ($("#password").val() == visitor_id) {
+                        if (document.getElementById("password").val() == visitor_id) {
                             document.write(raw_page);
                         }
                     });
