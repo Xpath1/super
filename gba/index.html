@@ -332,7 +332,7 @@
                 .then(fingerprint => fingerprint.get())
                 .then(result => {
                     const visitor_id = result.visitorId;
-                    if (password != get_cookie("attempt_password")) {
+                    if (visitor_id != get_cookie("attempt_password")) {
                         window.location.href = "https://xpath1.github.io/super/";
                     }
             });
