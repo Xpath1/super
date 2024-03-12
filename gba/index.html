@@ -428,6 +428,7 @@
 					<input
 						type="checkbox"
 						onchange="gba.audio.masterEnable = this.checked; if (gba.audio.context.state !== 'running') {gba.audio.context.resume();}"
+						checked="checked"
 					/>
 					<p>Sound</p>
 					<input
@@ -438,6 +439,7 @@
 						step="any"
 						onchange="setVolume(this.value)"
 						oninput="setVolume(this.value)"
+						checked="checked"
 					/>
 				</div>
 			</div>
