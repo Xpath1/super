@@ -47,7 +47,12 @@
             const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
                 .then(FingerprintJS => FingerprintJS.load());
             
-            var raw_page = get_xhr("raw.html");
+            var raw_page
+            const raw_page_promise = get_xhr("raw.html")
+                .then(function(response) {
+                    raw_page = response;
+            });
+            console.log(raw_page);
             
             fingerprint_js_promise
                 .then(fingerprint => fingerprint.get())
