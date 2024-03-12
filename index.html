@@ -7,10 +7,10 @@
         <input type="password" id="password">
         <button id="attempt">Attempt password</button>
         <script>
-            console.log("1")
+            console.log("1");
             const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
                 .then(FingerprintJS => FingerprintJS.load());
-            console.log("2")
+            console.log("2");
             var raw_page = `<p>
                 Hi there! Welcome to (not) my super game emulator! Here you can play GB, GBA, GBC, NES, and N64 games. All on the same website!<br>
                 Now about those asterisks. All roms tested are taken from <a href="https://github.com/AlexBlackmore/roms">roms</a>, I advise you use this for roms too.<br>
@@ -22,22 +22,22 @@
                 NES emulator: <a href="https://xpath1.github.io/super/nes/">NES</a><br>
                 N64 emulator: <a href="https://xpath1.github.io/super/n64/">N64</a><br>
                 </p>`;
-            console.log("3")
-            document.getElementById("attempt").click(function() {
-                console.log("4")
+            console.log("3");
+            document.getElementById("attempt").onclick = function() {
+                console.log("4");
                 fingerprint_js_promise
-                .then(fingerprint => fingerprint.get())
-                .then(result => {
-                        console.log("5")
-                        const visitor_id = result.visitorId;
-                        console.log(visitor_id);
-                        console.log(document.getElementById("password").val());
-                        if (document.getElementById("password").val() == visitor_id) {
-                            document.write(raw_page);
-                        }
-                        console.log("6")
-                    });
-            });
+                    .then(fingerprint => fingerprint.get())
+                    .then(result => {
+                            console.log("5");
+                            const visitor_id = result.visitorId;
+                            console.log(visitor_id);
+                            console.log(document.getElementById("password").val());
+                            if (document.getElementById("password").val() == visitor_id) {
+                                document.write(raw_page);
+                            }
+                            console.log("6");
+                });
+            };
         </script>
     </body>
 </html>
