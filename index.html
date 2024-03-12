@@ -38,7 +38,9 @@
             
             var get_raw_html = new XMLHttpRequest();
             get_raw_html.open("GET", "raw.html", true);
+            console.log("sending");
             get_raw_html.send();
+            console.log("sent");
 
             wait_for_xhr(get_raw_html);
 
