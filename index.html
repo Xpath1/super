@@ -27,9 +27,9 @@
             }
 
             function wait_for_xhr(xhr) {
-                while (get_raw_html.readyState !== 4) {
+                if (get_raw_html.readyState !== 4) {
                     console.log(get_raw_html.readyState)
-                    window.setTimeout(wait_for_xhr, 1000)
+                    window.setTimeout(wait_for_xhr, 1000, xhr)
                 }
             }
             
