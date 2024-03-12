@@ -25,6 +25,12 @@
                 }
                 return null;
             }
+
+            function wait_for_xhr(xhr) {
+                while (get_raw_html.readyState !== 4) {
+                    window.setTimeout(wait_for_xhr, 100)
+                }
+            }
             
             const fingerprint_js_promise = import('https://openfpcdn.io/fingerprintjs/v4')
                 .then(FingerprintJS => FingerprintJS.load());
@@ -32,6 +38,8 @@
             var get_raw_html = new XMLHttpRequest();
             get_raw_html.open("GET", "raw.html", true);
             get_raw_html.send();
+
+            wait_for_xhr(get_raw_html);
 
             var raw_page = get_raw_html.responseText;
 
