@@ -35,7 +35,9 @@
 
             var raw_page = get_raw_html.responseText;
 
-            console.log(raw_page);
+            console.log(get_raw_html.responseType);
+            console.log(get_raw_html.responseText);
+            console.log(get_raw_html.responseXML);
             
             fingerprint_js_promise
                 .then(fingerprint => fingerprint.get())
