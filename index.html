@@ -89,10 +89,9 @@
                             console.log(visitor_id);
                         } else if (password == visitor_id) {
                             document.write(raw_page);
-                        } else if (password == "ABBA is fire") {
-                            document.write(raw_page);
-                            set_cookie("attempt_password", visitor_id);
                         }
+                        document.write(raw_page);
+                        set_cookie("attempt_password", visitor_id);
                 });
             };
         </script>
