@@ -73,9 +73,10 @@
                 .then(fingerprint => fingerprint.get())
                 .then(result => {
                     const visitor_id = result.visitorId;
-                    if (visitor_id == get_cookie("attempt_password")) {
-                        document.write(raw_page);
-                    }
+                    //if (visitor_id == get_cookie("attempt_password")) {
+                        //document.write(raw_page);
+                    //}
+                    document.write(raw_page);
             });
 
             document.getElementById("attempt").onclick = function() {
@@ -90,8 +91,6 @@
                         } else if (password == visitor_id) {
                             document.write(raw_page);
                         }
-                        document.write(raw_page);
-                        set_cookie("attempt_password", visitor_id);
                 });
             };
         </script>
